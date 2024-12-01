@@ -157,7 +157,7 @@ app.post('/users', (req, res) => {
                 res.status(500).send("Internal server error");
             } else {
                 const token = generateAccessToken({ username });
-                res.status(201).json({ token });
+                res.status(201).json({ token, username });
             }
         };
 
