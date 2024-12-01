@@ -23,10 +23,7 @@ function App() {
     // fetch blogs from the server
     fetch(`${backend_url}/blogs`)
       .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        setBlogs(data)
-      })
+      .then(data => setBlogs(data))
       .catch(err => console.error(err))
       
   }, [])
