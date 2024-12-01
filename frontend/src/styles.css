@@ -17,6 +17,10 @@ nav .home-button {
   background-color: mediumslateblue;
 }
 
+nav .my-blogs-button {
+  background-color: mediumseagreen;
+}
+
 .error-message {
   color: tomato
 }
