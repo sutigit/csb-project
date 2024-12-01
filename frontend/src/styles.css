@@ -17,6 +17,10 @@ nav .home-button {
   background-color: mediumslateblue;
 }
 
+.error-message {
+  color: tomato
+}
+
 .blogs-section {
   display: flex;
   flex-direction: column;
