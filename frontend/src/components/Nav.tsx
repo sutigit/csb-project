@@ -29,7 +29,7 @@ export default function Nav() {
   )
 
   const HomeButton = () => (
-    <button onClick={() => navigate("/")}>
+    <button className='home-button' onClick={() => navigate("/")}>
       Home
     </button>
   )
