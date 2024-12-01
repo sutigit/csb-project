@@ -6,13 +6,16 @@ import { useNavigate } from 'react-router-dom';
 // Environment variables
 const backend_url = import.meta.env.VITE_BACKEND_URL
 
+// My components
+import Nav from '../components/Nav';
+
 export default function Login() {
-  const [ isError, setIsError ] = useState(false);
+  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e: any) => {
     e.preventDefault();
-    
+
     fetch(`${backend_url}/login`, {
       method: 'POST',
       headers: {
@@ -23,21 +26,23 @@ export default function Login() {
         password: e.target[1].value
       })
     })
-    .then(res => res.json())
-    .then(data => {
-      Cookies.set('jwt', data.token)
-      navigate('/')
-    })
-    .catch(err => {
-      console.error(err)
-      setIsError(true)
-    })
+      .then(res => res.json())
+      .then(data => {
+        Cookies.set('jwt', data.token)
+        Cookies.set('username', data.username)
+        navigate('/')
+      })
+      .catch(err => {
+        console.error(err)
+        setIsError(true)
+      })
   }
 
   return (
     <>
+      <Nav />
       <form onSubmit={handleLogin}>
-        { isError &&  <span className='error-message'>Error logging you in</span>}
+        {isError && <span className='error-message'>Error logging you in</span>}
         <input type="text" placeholder="Username" />
         <input type="password" placeholder="Password" />
         <button type="submit">Login</button>

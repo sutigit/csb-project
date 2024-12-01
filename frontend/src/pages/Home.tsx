@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 // My components
 import BlogCard from '../components/BlogCard'
+import Nav from '../components/Nav'
 
 interface Blog {
     user_id: number
@@ -33,6 +34,7 @@ export default function Home() {
 
     return (
         <>
+            <Nav />
             <h1>Blogs</h1>
             <section className='blogs-section'>
                 {isError && <p className='error-message'>Oops, something went wrong while trying to get beautiful blogs...</p>}

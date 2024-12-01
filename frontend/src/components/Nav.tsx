@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../styles.css'
 import { useNavigate, useLocation } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 export default function Nav() {
   const [isLogged, setIsLogged] = useState<boolean>(false)
@@ -22,7 +23,13 @@ export default function Nav() {
 
   const Logged = () => (
     <nav>
-      <button>
+      <h3>
+        Welcome, {Cookies.get('username')}
+      </h3>
+      <button className='my-blogs-button'>
+        My Blogs
+      </button>
+      <button onClick={handleLogout}>
         Logout
       </button>
     </nav>
@@ -33,6 +40,23 @@ export default function Nav() {
       Home
     </button>
   )
+
+  const handleLogout = () => {
+    // Clear cookies
+    Cookies.remove('jwt')
+    Cookies.remove('username')
+    setIsLogged(false)
+  }
+
+  useEffect(() => {
+    // Check if user is logged in
+    if (Cookies.get('jwt') && Cookies.get('username')) {
+      setIsLogged(true)
+      navigate("/")
+    } else {
+      handleLogout()
+    }
+  }, [isLogged])
 
   return (
     <nav>
