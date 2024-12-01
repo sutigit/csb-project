@@ -26,7 +26,8 @@ export default function Nav() {
       <h3>
         Welcome, {Cookies.get('username')}
       </h3>
-      <button className='my-blogs-button'>
+      { location.pathname !== "/" && <HomeButton />}
+      <button className='my-blogs-button' onClick={() => navigate("/dashboard")}>
         My Blogs
       </button>
       <button onClick={handleLogout}>
@@ -45,23 +46,21 @@ export default function Nav() {
     // Clear cookies
     Cookies.remove('jwt')
     Cookies.remove('username')
+    // Redirect to home
     setIsLogged(false)
+    navigate("/")
   }
 
   useEffect(() => {
     // Check if user is logged in
     if (Cookies.get('jwt') && Cookies.get('username')) {
       setIsLogged(true)
-      navigate("/")
-    } else {
-      handleLogout()
     }
   }, [isLogged])
 
   return (
     <nav>
-      { location.pathname !== "/" && <HomeButton />}
-      { (location.pathname !== "/login" && location.pathname !== "/signup") && (isLogged ? <Logged /> : <UnLogged />)}
+      { (location.pathname !== "/login" && location.pathname !== "/signup") ? (isLogged ? <Logged /> : <UnLogged />) : <HomeButton /> }
     </nav>
   )
 }
