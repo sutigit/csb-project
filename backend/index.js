@@ -74,7 +74,7 @@ app.post('/login', (req, res) => {
         }
         else {
             const token = generateAccessToken({ username });
-            res.status(200).json({ token });
+            res.status(200).json({ token, username });
         }
     }
 
