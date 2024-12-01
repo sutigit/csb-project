@@ -172,8 +172,7 @@ app.post('/users', (req, res) => {
 });
 
 
-// DELETE user by ID
-
+// DELETE user by ID - AUTHENTICATED
 /* Broken access control flaw fixed:
     app.delete('/users/:id', authenticateToken, (req, res) => {
 */
@@ -217,7 +216,7 @@ app.get('/blogs', (req, res) => {
     db.all(sql, callback);
 });
 
-// GET all blogs by user ID
+// GET all blogs by user ID - AUTHENTICATED
 /* Broken access control flaw fixed:
     app.get('/user/:user_id/blogs', authenticateToken, (req, res) => {
 */
@@ -243,7 +242,7 @@ app.get('/user/:user_id/blogs', (req, res) => {
 });
 
 
-// GET single blog by blog ID and user ID
+// GET single blog by blog ID and user ID - AUTHENTICATED
 /* Broken access control flaw fixed:
     app.get('/user/:user_id/blogs/:blog_id', authenticateToken, (req, res) => {
 */
@@ -271,7 +270,7 @@ app.get('/user/:user_id/blogs/:blog_id', (req, res) => {
 });
 
 
-// POST new blog by user ID
+// POST new blog by user ID - AUTHENTICATED
 /* Broken access control flaw fixed:
     app.post('/user/:user_id/blogs', authenticateToken, (req, res) => {
 */
@@ -308,7 +307,7 @@ app.post('/user/:user_id/blogs', (req, res) => {
     }
 });
 
-// DELETE blog by blog ID and user ID
+// DELETE blog by blog ID and user ID - AUTHENTICATED
 /* Broken access control flaw fixed:
     app.delete('/user/:user_id/blogs/:blog_id', authenticateToken, (req, res) => {
 */
