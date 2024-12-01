@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 require('dotenv').config();
 
@@ -9,6 +10,7 @@ const app = express();
 const port = process.env.DB_PORT;
 const host = process.env.DB_HOST;
 const name = process.env.DB_NAME;
+const frontend_url = process.env.FRONTEND_URL;
 const jwt_token = process.env.TOKEN_SECRET;
 
 const db = new sqlite3.Database(`./${name}.db`, (err) => {
@@ -19,6 +21,13 @@ const db = new sqlite3.Database(`./${name}.db`, (err) => {
 });
 
 app.use(express.json());
+
+// CORS policy
+const corsOptions = {
+    origin: frontend_url, // Allow only this origin
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
+app.use(cors(corsOptions));
 
 
 // Authentication utility functions ---------------------------------------------------------------------------------------------
