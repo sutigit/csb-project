@@ -21,6 +21,14 @@ nav .my-blogs-button {
   background-color: mediumseagreen;
 }
 
+.create-blog-button {
+  background-color: mediumseagreen;
+}
+
+.delete-button {
+  background-color: tomato;
+}
+
 .error-message {
   color: tomato
 }
@@ -37,7 +45,7 @@ nav .my-blogs-button {
   margin: 1em;
   display: inline-block;
   text-align: left;
-  max-width: 20em;
+  max-width: 100%;
   border-width: 1px;
   border-style: solid;
   border-color: #333;

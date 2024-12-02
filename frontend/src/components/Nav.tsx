@@ -23,13 +23,13 @@ export default function Nav() {
 
   const Logged = () => (
     <nav>
-      <h3>
+      <h3 style={{marginRight: '1rem'}}>
         Welcome, {Cookies.get('username')}
       </h3>
-      { location.pathname !== "/" && <HomeButton />}
-      <button className='my-blogs-button' onClick={() => navigate("/dashboard")}>
+      {location.pathname !== "/" && <HomeButton />}
+      {location.pathname !== "/dashboard" && <button className='my-blogs-button' onClick={() => navigate("/dashboard")}>
         My Blogs
-      </button>
+      </button>}
       <button onClick={handleLogout}>
         Logout
       </button>
@@ -60,7 +60,7 @@ export default function Nav() {
 
   return (
     <nav>
-      { (location.pathname !== "/login" && location.pathname !== "/signup") ? (isLogged ? <Logged /> : <UnLogged />) : <HomeButton /> }
+      {(location.pathname !== "/login" && location.pathname !== "/signup") ? (isLogged ? <Logged /> : <UnLogged />) : <HomeButton />}
     </nav>
   )
 }
