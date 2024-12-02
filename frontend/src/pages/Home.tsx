@@ -6,11 +6,8 @@ import { useState, useEffect } from 'react'
 import BlogCard from '../components/BlogCard'
 import Nav from '../components/Nav'
 
-interface Blog {
-    user_id: number
-    title: string
-    content: string
-}
+// Definitions
+import { Blog } from '../lib/definitions'
 
 // Environment variables
 const backend_url = import.meta.env.VITE_BACKEND_URL
