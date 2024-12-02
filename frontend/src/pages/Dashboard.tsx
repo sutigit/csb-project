@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom"
 
+// Definitions
+import { Blog } from "../lib/definitions"
+
 // My components
 import Nav from "../components/Nav"
 import BlogCard from "../components/BlogCard"
@@ -14,21 +17,30 @@ export default function Dashboard() {
 
     const navigate = useNavigate()
 
+    const getMyBlogs = async () => {
+        try {
+            const res_users = await fetch(`${backend_url}/users`)
+            const users = await res_users.json()
+
+            const user = users.find((user: any) => user.username === Cookies.get('username'))
+
+            const res_blogs = await fetch(`${backend_url}/user/${user.id}/blogs`)
+            const blogs = await res_blogs.json()
+            setMyBlogs(blogs)
+        }
+        catch (err) {
+            console.error(err)
+            setIsError(true)
+        }
+    };
+
     useEffect(() => {
         // Check if user is logged in
         if (!Cookies.get('jwt') || !Cookies.get('username')) {
             navigate("/")
+        } else {
+            getMyBlogs()
         }
-
-        // fetch blogs from the server
-        fetch(`${backend_url}/blogs`)
-            .then(res => res.json())
-            .then(data => setMyBlogs(data))
-            .catch(err => {
-                console.error(err)
-                setIsError(true)
-            })
-
     }, [])
 
     return (
@@ -47,9 +59,9 @@ export default function Dashboard() {
                 {isError && <p className='error-message'>Oops, something went wrong while trying to get your blogs...</p>}
                 {
                     myBlogs.length > 0 ?
-                        myBlogs.map((blog: any) => (
-                            <div style={{ marginBottom: '2rem' }}>
-                                <BlogCard key={blog.id} user_id={blog.user_id} title={blog.title} content={blog.content} />
+                        myBlogs.map((blog: Blog) => (
+                            <div key={blog.id} style={{ marginBottom: '2rem' }}>
+                                <BlogCard user_id={blog.user_id} title={blog.title} content={blog.content} />
                                 <button className="delete-button">Delete</button>
                             </div>
                         ))
