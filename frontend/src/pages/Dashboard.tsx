@@ -13,6 +13,7 @@ const backend_url = import.meta.env.VITE_BACKEND_URL
 
 export default function Dashboard() {
     const [myBlogs, setMyBlogs] = useState([])
+    const [isBlogCreated, setIsBlogCreated] = useState(false)
     const [isError, setIsError] = useState(false)
     const [isErrorCreatingBlog, setIsErrorCreatingBlog] = useState(false)
 
@@ -58,12 +59,12 @@ export default function Dashboard() {
             })
 
             if (res.status === 201) {
-                
+
                 // Clean up form
                 e.target.title.value = ''
                 e.target.content.value = ''
-                
-                alert('Blog created successfully')
+
+                setIsBlogCreated(true)
 
                 getMyBlogs()
             } else if (res.status === 400) {
@@ -73,6 +74,7 @@ export default function Dashboard() {
         } catch (err) {
             console.error(err)
             setIsErrorCreatingBlog(true)
+            setIsBlogCreated(false)
         }
     };
 
@@ -97,40 +99,52 @@ export default function Dashboard() {
     };
 
     useEffect(() => {
-            // Check if user is logged in
-            if (!Cookies.get('jwt') || !Cookies.get('username')) {
-                navigate("/")
-            } else {
-                getMyBlogs()
-            }
-        }, [])
+        // Check if user is logged in
+        if (!Cookies.get('jwt') || !Cookies.get('username')) {
+            navigate("/")
+        } else {
+            getMyBlogs()
+        }
+    }, [])
 
-        return (
-            <>
-                <Nav />
-                <h1>Dashboard</h1>
-                <h2>Write new blog</h2>
-                {isErrorCreatingBlog && <p className='error-message'>Hmm, something went wrong while trying to create your blog...</p>}
-                <form onSubmit={createBlog}>
-                    <input type="text" name="title" placeholder="Blog title" />
-                    <textarea name="content" placeholder="Things I want to write about..." id="" rows={8}></textarea>
-                    <button className="create-blog-button" type="submit">Publish Blog</button>
-                </form>
-                <br />
-                <h2>My Blogs</h2>
-                <section className='blogs-section'>
-                    {isError && <p className='error-message'>Oops, something went wrong while trying to get your blogs...</p>}
-                    {
-                        myBlogs.length > 0 ?
-                            myBlogs.map((blog: Blog) => (
-                                <div key={blog.id} style={{ marginBottom: '2rem' }}>
-                                    <BlogCard user_id={blog.user_id} title={blog.title} content={blog.content} />
-                                    <button className="delete-button" onClick={() => deleteBlog(blog.user_id, blog.id)}>Delete</button>
-                                </div>
-                            ))
-                            : <p>You don't have any blogs yet</p>
-                    }
-                </section>
-            </>
-        )
-    }
+    return (
+        <>
+            <Nav />
+            <h1>Dashboard</h1>
+            <h2>Write new blog</h2>
+            {isErrorCreatingBlog && <p className='error-message'>Hmm, something went wrong while trying to create your blog...</p>}
+
+            {
+                isBlogCreated ?
+                    <div>
+                        <p className="success-message">Blog successfully created</p>
+                        <button onClick={() => setIsBlogCreated(false)}>
+                            Create new blog
+                        </button>
+                    </div>
+                    :
+                    <form onSubmit={createBlog}>
+                        <input type="text" name="title" placeholder="Blog title" />
+                        <textarea name="content" placeholder="Things I want to write about..." id="" rows={8}></textarea>
+                        <button className="create-blog-button" type="submit">Publish Blog</button>
+                    </form>
+            }
+
+            <br />
+            <h2>My Blogs</h2>
+            <section className='blogs-section'>
+                {isError && <p className='error-message'>Oops, something went wrong while trying to get your blogs...</p>}
+                {
+                    myBlogs.length > 0 ?
+                        myBlogs.map((blog: Blog) => (
+                            <div key={blog.id} style={{ marginBottom: '2rem' }}>
+                                <BlogCard user_id={blog.user_id} title={blog.title} content={blog.content} />
+                                <button className="delete-button" onClick={() => deleteBlog(blog.user_id, blog.id)}>Delete</button>
+                            </div>
+                        ))
+                        : <p>You don't have any blogs yet</p>
+                }
+            </section>
+        </>
+    )
+}
