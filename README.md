@@ -63,7 +63,7 @@ $ npm run serve
 
 
 ## Frontend installation 
-Now back from the parent folder, navigate into the `frontend` folder:
+Open a new terminal window. Now back from the parent folder, navigate into the `frontend` folder:
 ```
 # ./
 
