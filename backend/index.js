@@ -212,7 +212,7 @@ app.get('/blogs', (req, res) => {
         }
     }
 
-    const sql = 'SELECT * FROM blogs';
+    const sql = 'SELECT * FROM blogs ORDER BY created_at DESC';
     db.all(sql, callback);
 });
 
@@ -237,7 +237,7 @@ app.get('/user/:user_id/blogs', (req, res) => {
         db.all(sql, [ user_id ], callback);
     */
 
-    const sql = `SELECT * FROM blogs WHERE user_id = ${user_id}`;
+    const sql = `SELECT * FROM blogs WHERE user_id = ${user_id} ORDER BY created_at DESC`;
     db.all(sql, callback);
 });
 
