@@ -1,5 +1,5 @@
 # CSB-project
-This repository is the project 1 for Cyber Security Basics from University of Helsinki. It has a frontend and the backend. The project showcases 5 of the top 10 OWASP sevurity vulnerabilities listed in the OWASP's website. The following content introduces instruction guides and how to use the app for assignment review purposes.
+This repository is the project 1 for Cyber Security Basics from University of Helsinki. It has a frontend and the backend. The project showcases 5 of the top 10 OWASP security vulnerabilities from list 2017 in the OWASP's website. The following content introduces instruction guides and how to use the app for assignment review purposes.
 
 ## Prerequisites
 Make sure you have installed
