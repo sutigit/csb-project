@@ -1,6 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  max-width: 32rem;
+  width: 100%;
+  margin: auto;
+
   padding: 2rem;
   text-align: center;
 }
@@ -36,19 +38,22 @@ nav .my-blogs-button {
 .blogs-section {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  gap: 1rem;
 }
 
 .blog-card {
-  padding: 2em;
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
   box-shadow: 0 0 1em #0003;
   border-radius: 1em;
-  margin: 1em;
   display: inline-block;
   text-align: left;
-  max-width: 100%;
   border-width: 1px;
   border-style: solid;
   border-color: #333;
+  margin-bottom: 1rem;
 }
 
 .read-the-docs {
