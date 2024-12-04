@@ -19,9 +19,20 @@ Installation guides for each can be found here. Make sure to check the guide cor
 - [node installation](https://nodejs.org/en/download/package-manager)
 - [sqlite3 installation](https://www.tutorialspoint.com/sqlite/sqlite_installation.htm)
 
+## Installation
+
+First we must copy the content of this repository to your local machine.
+
+In your preferred folder in your machine, run:
+```
+$ git clone https://github.com/sutigit/csb-project.git
+```
+
+Or download the repository from github from [https://github.com/sutigit/csb-project/archive/refs/heads/main.zip](https://github.com/sutigit/csb-project/archive/refs/heads/main.zip)
+
 
 ## Backend installation
-From the parent folder navigate into the `backend` folder:
+Inside the downloaded folder navigate into the `backend` folder:
 ```
 # ./
 
@@ -52,7 +63,7 @@ $ npm run serve
 
 
 ## Frontend installation 
-Now in your terminal and from the parent folder, navigate into the `frontend` folder:
+Now back from the parent folder, navigate into the `frontend` folder:
 ```
 # ./
 
